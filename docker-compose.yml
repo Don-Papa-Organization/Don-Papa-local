@@ -1,0 +1,124 @@
+services:
+  # GATEWAY
+  gateway:
+    build: ./Gateway
+    ports:
+      - "4000:4000"
+    depends_on:
+      - email-service
+      - inventory-service-app
+      - user-service-app  
+      - event-service-app
+    networks:
+      - backend-network
+
+  email-service:
+    build: ./ms7-email-service
+    ports:
+      - "4007:4007"
+    environment:
+      - PORT=4007
+    networks:
+      - backend-network
+
+  # MICROSERVICIO 1 - INVENTARIO
+  inventory-service-db:  
+    build: ./ms1-inventory-service/Database
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DB_HOST=inventory-mysql  
+    networks:
+      - backend-network
+
+  inventory-service-app: 
+    build: ./ms1-inventory-service/SistemaDeInventario
+    ports:
+      - "4001:4001"
+    environment:
+      - PORT=4001
+      - DATABASE_SERVICE_URL=http://inventory-service-db:3001  
+    networks:
+      - backend-network
+
+  inventory-mysql:  
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME_INVENTORY}  
+    volumes:
+      - inventory_mysql_data:/var/lib/mysql
+    networks:
+      - backend-network
+
+  # MICROSERVICIO 2 - USUARIOS
+  user-service-db:
+    build: ./ms2-user-service/Database
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - DB_HOST=user-mysql
+    networks:
+      - backend-network
+
+  user-service-app:
+    build: ./ms2-user-service/UsuariosYEmpleados
+    ports:
+      - "4002:4002"
+    environment:
+      - PORT=4002
+      - DATABASE_SERVICE_URL=http://user-service-db:3002 
+    networks:
+      - backend-network
+
+  user-mysql:  
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME_USERS}
+    volumes:
+      - users_mysql_data:/var/lib/mysql
+    networks:
+      - backend-network
+
+  # MICROSERVICIO 5 - EVENTOS
+  event-service-db: 
+    build: ./ms5-event-service/Database
+    ports:
+      - "3005:3005"
+    environment:
+      - PORT=3005
+      - DB_HOST=event-mysql  
+    networks:
+      - backend-network
+
+  event-service-app:  
+    build: ./ms5-event-service/EventosYPromociones
+    ports:
+      - "4005:4005"
+    environment:
+      - PORT=4005
+      - DATABASE_SERVICE_URL=http://event-service-db:3005  
+    networks:
+      - backend-network
+
+  event-mysql: 
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME_EVENTS}  
+    volumes:
+      - events_mysql_data:/var/lib/mysql
+    networks:
+      - backend-network
+
+volumes:
+  inventory_mysql_data:
+  users_mysql_data: 
+  events_mysql_data:
+
+networks:
+  backend-network:
+    driver: bridge
