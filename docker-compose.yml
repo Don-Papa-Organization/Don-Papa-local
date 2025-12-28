@@ -24,6 +24,8 @@ services:
   # MICROSERVICIO 1 - INVENTARIO
   inventory-service-db:  
     build: ./ms1-inventory-service/Database
+    depends_on:
+      - inventory-mysql
     ports:
       - "3001:3001"
     environment:
@@ -34,6 +36,8 @@ services:
 
   inventory-service-app: 
     build: ./ms1-inventory-service/SistemaDeInventario
+    depends_on:
+      - inventory-service-db
     ports:
       - "4001:4001"
     environment:
@@ -57,6 +61,8 @@ services:
     build: ./ms2-user-service/Database
     ports:
       - "3002:3002"
+    depends_on:
+      - user-mysql
     environment:
       - PORT=3002
       - DB_HOST=user-mysql
@@ -64,7 +70,9 @@ services:
       - backend-network
 
   user-service-app:
-    build: ./ms2-user-service/UsuariosYEmpleados
+    build: ./ms2-user-service/UsuariosYEmpleados1 #este es el microservicio
+    depends_on:
+      - user-service-db
     ports:
       - "4002:4002"
     environment:
@@ -86,6 +94,8 @@ services:
   # MICROSERVICIO 5 - EVENTOS
   event-service-db: 
     build: ./ms5-event-service/Database
+    depends_on:
+      - event-mysql
     ports:
       - "3005:3005"
     environment:
@@ -96,6 +106,8 @@ services:
 
   event-service-app:  
     build: ./ms5-event-service/EventosYPromociones
+    depends_on:
+      - event-service-db
     ports:
       - "4005:4005"
     environment:

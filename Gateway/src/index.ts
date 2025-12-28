@@ -15,14 +15,18 @@
     next();
   });
 
-  const routes = {
+    const routes = {
       "/inventory": process.env.INVENTORY_URL || "http://inventory-service-app:4001/api/",
       "/users": process.env.USERS_AND_EMPLOYERS_URL || "http://user-service-app:4002/api",
       //"/orders": process.env.ORDERS_URL || "http://order-service:4003",
       //"/reservations": process.env.RESERVATIONS_AND_TABLES_URL || "http://reservation-and-table-service:4004",
-      "/events": process.env.EVENTS_AND_PROMOTIONS_URL || "http://event-service-app:4005/api/",
+      // Eventos y Promociones (exponer todas las rutas del ms5)
+      "/events": process.env.EVENTS_AND_PROMOTIONS_URL_EVENTS || "http://event-service-app:4005/api/events",
+      "/promotions": process.env.EVENTS_AND_PROMOTIONS_URL_PROMOTIONS || "http://event-service-app:4005/api/promotions",
+      "/eventos-dias": process.env.EVENTS_AND_PROMOTIONS_URL_EVENTOS_DIAS || "http://event-service-app:4005/api/eventos-dias",
+      "/productos-promocion": process.env.EVENTS_AND_PROMOTIONS_URL_PRODUCTOS_PROMOCION || "http://event-service-app:4005/api/productos-promocion",
       //"/reports": process.env.REPORTS_AND_BINNACLES_URL || "http://report-binnacle-service:4006",
-  }
+    }
 
   Object.entries(routes).forEach(([path, target]) => {
     console.log(path, target) 
@@ -31,7 +35,12 @@
       createProxyMiddleware({
         target, 
         changeOrigin: true,
-        pathRewrite: (pathReq) => `${pathReq}`,
+        pathRewrite: (pathReq) => {
+          // Eliminar el prefijo del path (ej: /users -> /api)
+          const newPath = pathReq.replace(path, '');
+          console.log(`[PROXY REWRITE] ${pathReq} -> ${newPath}`);
+          return newPath;
+        },
         logger: console, 
         timeout: 60000, // 60 segundos
         proxyTimeout: 60000, // 60 segundos
@@ -42,7 +51,7 @@
   });
 
 
-  const PORT = process.env.PORT;
+  const PORT = process.env.PORT || 4000;
 
   async function startServer() {
       const server = app.listen(PORT, () => {
