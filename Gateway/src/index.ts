@@ -19,7 +19,9 @@
       "/inventory": process.env.INVENTORY_URL || "http://inventory-service-app:4001/api/",
       "/users": process.env.USERS_AND_EMPLOYERS_URL || "http://user-service-app:4002/api",
       //"/orders": process.env.ORDERS_URL || "http://order-service:4003",
-      //"/reservations": process.env.RESERVATIONS_AND_TABLES_URL || "http://reservation-and-table-service:4004",
+      
+      "/reservations": process.env.RESERVATIONS_AND_TABLES_URL || "http://reservation-service-app:4004/api/reservations",
+      "/table": process.env.RESERVATIONS_AND_TABLES_URL || "http://reservation-service-app:4004/api/table",
       // Eventos y Promociones (exponer todas las rutas del ms5)
       "/events": process.env.EVENTS_AND_PROMOTIONS_URL_EVENTS || "http://event-service-app:4005/api/events",
       "/promotions": process.env.EVENTS_AND_PROMOTIONS_URL_PROMOTIONS || "http://event-service-app:4005/api/promotions",
