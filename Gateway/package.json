@@ -12,11 +12,14 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
+    "axios": "^1.13.2",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "http-proxy-middleware": "^3.0.5"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.5",
     "@types/http-proxy-middleware": "^0.19.3",
     "@types/node": "^24.10.0",

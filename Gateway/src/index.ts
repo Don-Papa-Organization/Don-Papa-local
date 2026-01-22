@@ -1,9 +1,15 @@
   import express, { Express, Request, Response, NextFunction} from "express";
   import { createProxyMiddleware } from "http-proxy-middleware";
   import dotenv from 'dotenv';
+  import cookieParser from 'cookie-parser';
+  import { authGatewayMiddleware } from './middleware/authGatewayMiddleware';
+  
   dotenv.config({ path: './src/.env' });
 
   const app: Express = express();
+
+  // Middleware para parsear cookies (necesario para el auth middleware)
+  app.use(cookieParser());
 
   // NO usar ningún middleware de body parsing global
   // El proxy middleware de http-proxy-middleware va a manejar el stream directamente
@@ -15,11 +21,22 @@
     next();
   });
 
-    const routes = {
+  // Aplicar middleware de autenticación ANTES de los proxies
+  // Este middleware solo ayuda a refrescar tokens automáticamente
+  // No bloquea rutas - cada microservicio gestiona su propia autenticación
+  app.use(async (req: Request, res: Response, next: NextFunction) => {
+    return authGatewayMiddleware(req, res, next);
+  });
+
+  const routes = {
+      // Productos e Inventario (exponer todas las rutas del ms1)
       "/inventory": process.env.INVENTORY_URL || "http://inventory-service-app:4001/api/",
+      // Usuarios y Empleados (exponer todas las rutas del ms2)
       "/users": process.env.USERS_AND_EMPLOYERS_URL || "http://user-service-app:4002/api",
-      //"/orders": process.env.ORDERS_URL || "http://order-service:4003",
-      
+      // Pedidos y Pagos (exponer todas las rutas del ms3)
+      "/orders": process.env.ORDERS_AND_PAYMENTS_URL_ORDERS || "http://order-service-app:4003/api/orders",
+      "/payments": process.env.ORDERS_AND_PAYMENTS_URL_PAYMENTS || "http://order-service-app:4003/api/payments",
+      // Reservaciones y Mesas 
       "/reservations": process.env.RESERVATIONS_AND_TABLES_URL || "http://reservation-service-app:4004/api/reservations",
       "/table": process.env.RESERVATIONS_AND_TABLES_URL || "http://reservation-service-app:4004/api/table",
       // Eventos y Promociones (exponer todas las rutas del ms5)
@@ -27,7 +44,8 @@
       "/promotions": process.env.EVENTS_AND_PROMOTIONS_URL_PROMOTIONS || "http://event-service-app:4005/api/promotions",
       "/eventos-dias": process.env.EVENTS_AND_PROMOTIONS_URL_EVENTOS_DIAS || "http://event-service-app:4005/api/eventos-dias",
       "/productos-promocion": process.env.EVENTS_AND_PROMOTIONS_URL_PRODUCTOS_PROMOCION || "http://event-service-app:4005/api/productos-promocion",
-      //"/reports": process.env.REPORTS_AND_BINNACLES_URL || "http://report-binnacle-service:4006",
+      //reportes y bitacoras
+      "/reports": process.env.REPORTS_AND_BINNACLES_URL || "http://report-service-app:4006/api",
     }
 
   Object.entries(routes).forEach(([path, target]) => {
