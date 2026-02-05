@@ -1,0 +1,51 @@
+.btn-grid {
+  background: #D4AF37;
+  color: #000000;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+
+  /* Dimensiones */
+  width: 140px;
+  height: 40px;
+  max-height: 50px;
+
+  font-family: inherit;
+  margin: 20px;
+
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  .icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      filter: brightness(0) saturate(100%);
+      /* mantiene negro */
+    }
+  }
+
+  .texto {
+    color: #000;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}

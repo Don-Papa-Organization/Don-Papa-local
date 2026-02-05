@@ -1,0 +1,25 @@
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lora:wght@400&display=swap"
+    rel="stylesheet">
+</head>
+
+<app-header>
+  <app-ui-icon-button link="http://google.com"  texto="Ayuda" urlIcono="icons/iconoAyuda.svg">
+  </app-ui-icon-button>
+
+  <app-ui-icon-button link="http://facebook.com" texto="Salir" urlIcono="icons/iconoSalir.svg">
+  </app-ui-icon-button>
+</app-header>
+
+<app-sidebar></app-sidebar>
+
+<main class="main-content">
+  <ui-breadcrumbs [rutas]="[
+    { label: 'Inicio', ruta: '/' },
+    { label: 'Productos', ruta: '/productos' },
+    { label: 'Editar Producto' }
+  ]"></ui-breadcrumbs>
+  
+  <!-- Aquí va el contenido de las páginas -->
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,25 @@
+<nav class="breadcrumbs" role="navigation" aria-label="breadcrumb">
+  <ol class="crumb-list">
+    <li *ngFor="let ruta of rutas; let i = index" class="crumb-item">
+
+      <button
+        *ngIf="i !== rutas.length - 1"
+        class="crumb-button"
+        type="button"
+        (click)="onClick(ruta, i)"
+      >
+        {{ ruta.label }}
+      </button>
+
+      <span *ngIf="i === rutas.length - 1" class="crumb-current">
+        {{ ruta.label }}
+      </span>
+
+      <span *ngIf="i !== rutas.length - 1" class="crumb-separator">
+        /
+      </span>
+
+    </li>
+  </ol>
+</nav>
+

@@ -1,0 +1,43 @@
+.breadcrumbs {
+  background: transparent;
+  padding: 5px 0; // padding vertical
+}
+
+.crumb-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px; // espaciado entre items
+  margin: 0;
+  padding: 0;
+}
+
+.crumb-item {
+  display: flex;
+  align-items: center;
+  gap: 12px; // separador con espacio
+}
+
+.crumb-button {
+  background: none;
+  border: none;
+  color: #FFFFFF;  // blanco
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.crumb-button:hover {
+  color: #D4AF37; // dorado en hover
+}
+
+.crumb-current {
+  color: #FFFFFF; // blanco
+  font-size: 20px;
+  cursor: default;
+}
+
+.crumb-separator {
+  color: #D4AF37; // separador dorado
+  font-size: 20px;
+}

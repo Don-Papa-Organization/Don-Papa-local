@@ -1,0 +1,28 @@
+/*Diseño del input  botones en tres tamaños*/
+.ui-btn {
+  background-color: #D4AF37;
+  color: #000000;
+  padding: 10px 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  /* Texto centrado */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Dimensiones */
+  width: auto;
+  height: 40px;
+  max-width: 450px;
+  max-height: 50px;
+
+  font-family: inherit;
+  font-size: 18px;
+  margin: 20px;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
