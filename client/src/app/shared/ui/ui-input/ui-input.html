@@ -3,6 +3,7 @@
   <input 
     class="ui-input-field"
     [placeholder]="placeholder"
-    [value]="valorInput"
+    (input)="valorInputChange.emit($any($event.target).value)"
+    [type]="tipo"
   />
 </div>

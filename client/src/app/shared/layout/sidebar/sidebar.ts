@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MenuItem } from '../../interfaces/menu-item';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,14 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './sidebar.scss'
 })
 export class Sidebar {
-  menuItems = [
-    { texto: 'Inventario', urlIcono: 'icons/iconoInventario.svg', link: '/inventario' },
-    { texto: 'Empleados', urlIcono: 'icons/iconoEmpleados.svg', link: '/empleados' },
-    { texto: 'Reportes', urlIcono: 'icons/iconoReportes.svg', link: '/reportes' },
-    { texto: 'Promociones', urlIcono: 'icons/iconoPromociones.svg', link: '/promociones' },
-    { texto: 'Usuarios', urlIcono: 'icons/iconoUsuarios.svg', link: '/usuarios' },
-    { texto: 'Bitacora', urlIcono: 'icons/iconoBitacora.svg', link: '/monitoreo' },
-    { texto: 'Estadisticas', urlIcono: 'icons/iconoEstadisticas.svg', link: '/historial' }
-  ];
+  @Input() menuItems: MenuItem[] = [];
 
 }

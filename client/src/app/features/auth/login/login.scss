@@ -1,0 +1,53 @@
+.login-page{
+    width: 370px;
+    height: 439px;
+    background-color: #1A120B;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;   
+    
+
+    h2{
+        padding-top: 50px;
+        padding-bottom: 30px;
+        font-weight: 100;
+        color: white;
+        font-size: 33px;
+    }
+    margin: 0 auto;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    border-radius: 7px;
+}
+
+
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    .contrasenaSection{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 7px;
+    }
+    
+
+    ui-button{
+        margin-top: 10px;        
+    }
+}
+
+.link{
+    font-size: 14px;
+    color: #D4AF37;
+    text-decoration: none;
+}
+
+.p{
+    color: white;
+}

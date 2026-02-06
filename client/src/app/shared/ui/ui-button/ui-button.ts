@@ -10,4 +10,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class UiButton {
      @Input() texto!: string;             // Recibe el texto del botón
      @Output() accion = new EventEmitter<void>();
+
+     @Input() customWidth: string = 'fit-content'; // Ancho del botón, por defecto 'auto'
+  @Input() tipo: 'button' | 'submit' | 'reset' = 'button';
 }

@@ -7,17 +7,19 @@
     </div>
     
     <nav class="menu-container">
-        @for (item of menuItems; track item.texto){
-            <app-ui-icon-button
-            [texto]="item.texto"
-            [urlIcono]="item.urlIcono"
-            [link]="item.link"
-            [sidebarStyles]="true"
-            [fullWidth]="true"
-            [showBorder]="true"
-            [customHeight]=`60px`
-            >
-            </app-ui-icon-button>
+        @if (menuItems.length > 0) {
+            @for (item of menuItems; track item.texto){
+                <app-ui-icon-button
+                [texto]="item.texto"
+                [urlIcono]="item.urlIcono"
+                [link]="item.link"
+                [sidebarStyles]="true"
+                [fullWidth]="true"
+                [showBorder]="true"
+                [customHeight]=`60px`
+                >
+                </app-ui-icon-button>
+            }
         }
     </nav>
 </aside>

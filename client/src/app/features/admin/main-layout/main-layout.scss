@@ -1,0 +1,24 @@
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-content {
+  position: fixed;
+  top: 70px; /* Altura del header */
+  left: 230px; /* Ancho del sidebar */
+  right: 0;
+  bottom: 0;
+  width: calc(100% - 230px);
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #2B1D13;
+  padding: 20px;
+}
+
+.estiloIconButtonCustom{
+  max-width: 180px;
+  width: fit-content;
+}

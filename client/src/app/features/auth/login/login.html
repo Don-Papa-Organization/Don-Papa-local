@@ -1,0 +1,33 @@
+<main class="login-page">
+    <h2>Iniciar Sesión</h2>
+
+    <form action="" class="formulario">
+        <ui-input 
+        tituloInput="Correo electronico" 
+        placeholder="ejemplo@correo.com"
+        (valorInputChange)="email = $event"
+        >
+        </ui-input>            
+            <section class="contrasenaSection">
+                <ui-input 
+                tituloInput="Contraseña" 
+                placeholder="Ingresa tu contraseña"
+                (valorInputChange)="password = $event"
+                tipo="password"
+                >
+                </ui-input>
+                <a routerLink="/recuperarContraseña" class="link">olvidaste tu contraseña?</a>
+            </section>
+        
+
+        <ui-button
+            texto="Iniciar Sesion"
+            customWidth="250px"
+            (accion)="guardarValores()"
+            tipo="submit"
+        >
+        </ui-button>
+
+        <p class="p">¿No tienes cuenta? <a routerLink="/registrarse" class="link">Registrarse</a></p>
+    </form>
+</main>

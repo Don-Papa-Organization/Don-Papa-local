@@ -1,3 +1,10 @@
-<button class="ui-btn" (click)="accion.emit()">
+<button 
+class="ui-btn" 
+(click)="accion.emit()" 
+[attr.type]="tipo"
+[ngStyle]="{
+        'width': customWidth
+    }"
+>
   {{ texto }}
 </button>
