@@ -3,13 +3,32 @@
   import dotenv from 'dotenv';
   import cookieParser from 'cookie-parser';
   import { authGatewayMiddleware } from './middleware/authGatewayMiddleware';
-  
+  import cors from 'cors';
+
   dotenv.config({ path: './src/.env' });
 
   const app: Express = express();
 
   // Middleware para parsear cookies (necesario para el auth middleware)
   app.use(cookieParser());
+
+
+  // CORS primero
+  app.use(cors({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:4200',
+    credentials: true,
+    methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+    allowedHeaders: ['Content-Type','Authorization']
+  }));
+
+  // Preflight sin auth
+  app.options('*', (req, res) => res.sendStatus(204));
+
+  // Evitar que el auth middleware bloquee OPTIONS
+  app.use((req, res, next) => {
+    if (req.method === 'OPTIONS') return res.sendStatus(204);
+    return authGatewayMiddleware(req, res, next);
+  });
 
   // NO usar ningún middleware de body parsing global
   // El proxy middleware de http-proxy-middleware va a manejar el stream directamente
