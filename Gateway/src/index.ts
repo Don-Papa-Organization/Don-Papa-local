@@ -14,15 +14,15 @@
 
 
   // CORS primero
-  app.use(cors({
+/*  app.use(cors({
     origin: process.env.CORS_ORIGIN || 'http://localhost:4200',
     credentials: true,
     methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
     allowedHeaders: ['Content-Type','Authorization']
-  }));
+  }));*/
 
-  // Preflight sin auth
-  app.options('*', (req, res) => res.sendStatus(204));
+  // Preflight sin auth (Express 5 no acepta '*')
+  //app.options('/*', (req, res) => res.sendStatus(204));
 
   // Evitar que el auth middleware bloquee OPTIONS
   app.use((req, res, next) => {

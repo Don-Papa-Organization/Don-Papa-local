@@ -1,4 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as AuthActions from './domain/auth/state/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +8,11 @@ import { Component, signal } from '@angular/core';
   standalone: false,
   styleUrl: './app.scss'
 })
-export class App {
-  
+export class App implements OnInit {
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(AuthActions.loadProfile());
+  }
 }
 

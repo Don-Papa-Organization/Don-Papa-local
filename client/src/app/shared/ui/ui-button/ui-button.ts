@@ -13,4 +13,5 @@ export class UiButton {
 
      @Input() customWidth: string = 'fit-content'; // Ancho del botón, por defecto 'auto'
   @Input() tipo: 'button' | 'submit' | 'reset' = 'button';
+  @Input() disabled: boolean = false;
 }

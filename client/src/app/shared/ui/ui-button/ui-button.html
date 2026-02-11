@@ -2,6 +2,7 @@
 class="ui-btn" 
 (click)="accion.emit()" 
 [attr.type]="tipo"
+[disabled]="disabled"
 [ngStyle]="{
         'width': customWidth
     }"

@@ -3,7 +3,9 @@
   <input 
     class="ui-input-field"
     [placeholder]="placeholder"
-    (input)="valorInputChange.emit($any($event.target).value)"
     [type]="tipo"
+    [value]="value"
+    [disabled]="isDisabled"
+    (input)="onInput($event)"
   />
 </div>

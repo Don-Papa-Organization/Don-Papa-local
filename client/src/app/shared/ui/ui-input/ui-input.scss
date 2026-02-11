@@ -27,6 +27,9 @@
       color: rgba(255, 255, 255, 0.5);
     }
   }
+}
 
- 
+:host(.ng-invalid.ng-touched) .input-container input {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
 }

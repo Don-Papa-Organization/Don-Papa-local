@@ -1,30 +1,55 @@
 <main class="login-page">
     <h2>Iniciar Sesión</h2>
 
-    <form action="" class="formulario">
+    <form (ngSubmit)="login()"  class="formulario" #loginForm="ngForm">
         <ui-input 
         tituloInput="Correo electronico" 
         placeholder="ejemplo@correo.com"
-        (valorInputChange)="email = $event"
+        [(ngModel)]="email"
+        name="email"
+        tipo="email"
+        required
+        #emailInput="ngModel"
+
         >
         </ui-input>            
-            <section class="contrasenaSection">
-                <ui-input 
-                tituloInput="Contraseña" 
-                placeholder="Ingresa tu contraseña"
-                (valorInputChange)="password = $event"
-                tipo="password"
-                >
-                </ui-input>
-                <a routerLink="/recuperarContraseña" class="link">olvidaste tu contraseña?</a>
-            </section>
+        @if (emailInput.invalid && emailInput.touched) {
+            <div class="error">
+                @if (emailInput.errors?.['required']) { Correo electrónico es requerido }
+                @if (emailInput.errors?.['email']) { Correo electrónico no es válido }
+            </div>
+        }
+        <section class="contrasenaSection">
+            <ui-input 
+            tituloInput="Contraseña" 
+            placeholder="Ingresa tu contraseña"
+            [(ngModel)]="password"
+            name="password"
+            tipo="password"
+            required
+            minlength="6"
+            #passwordInput="ngModel"
+            >
+            </ui-input>
+            <a routerLink="/recuperarContraseña" class="link">¿Olvidaste tu contraseña?</a>
+        </section>
         
+         @if (passwordInput.invalid && passwordInput.touched) {
+            <div class="error">
+                @if (passwordInput.errors?.['required']) { Contraseña es requerida }
+                @if (passwordInput.errors?.['minlength']) { La contraseña debe tener al menos 6 caracteres }
+            </div>
+        }
+
+        @if (errorMessage) {
+            <div class="error">{{ errorMessage }}</div>
+        }
 
         <ui-button
             texto="Iniciar Sesion"
             customWidth="250px"
-            (accion)="guardarValores()"
             tipo="submit"
+            [disabled]="loginForm.invalid || isSubmitting"
         >
         </ui-button>
 
