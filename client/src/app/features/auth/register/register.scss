@@ -1,0 +1,75 @@
+.login-page{
+    max-height: 550px;
+
+    width: 370px;
+    height: fit-content;
+    padding-bottom: 15px;
+    background-color: #1A120B;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;   
+    
+    border: 1px solid #D4AF37;
+    h2{
+        padding-top: 50px;
+        padding-bottom: 30px;
+        font-weight: 100;
+        color: white;
+        font-size: 33px;
+    }
+    margin: 0 auto;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    border-radius: 7px;
+}
+
+
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    .contrasenaSection{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 7px;
+        p{
+            color: #ffffffc7;
+            font-size: 10px;
+            width: 270px;
+        }
+    }
+    
+
+    ui-button{
+        margin-top: 10px;        
+    }
+}
+
+.link{
+    font-size: 14px;
+    color: #D4AF37;
+    text-decoration: none;
+}
+
+.p{
+    color: white;
+}
+
+.error{
+    color: #e74c3c;
+    font-size: 12px;
+    align-self: center;
+    margin-top: -10px;
+}
+
+.success{
+    color: #2ecc71;
+    font-size: 12px;
+    align-self: center;
+    margin-top: -10px;
+}   

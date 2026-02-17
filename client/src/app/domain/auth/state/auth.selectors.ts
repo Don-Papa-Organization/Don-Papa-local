@@ -23,6 +23,21 @@ export const selectAuthError = createSelector(
   (state) => state.error
 );
 
+export const selectAuthMessage = createSelector(
+  selectAuthState,
+  (state) => state.message
+);
+
+export const selectEmailExists = createSelector(
+  selectAuthState,
+  (state) => state.emailExists
+);
+
+export const selectProfile = createSelector(
+  selectAuthState,
+  (state) => state.profile
+);
+
 export const selectAccessToken = createSelector(
   selectAuthState,
   (state) => state.accessToken

@@ -1,12 +1,17 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap } from "rxjs";
+import { catchError, map, of, switchMap, tap } from "rxjs";
 import * as AuthActions from "./auth.actions";
 import { Usuario } from "../../users/models/usuario.model";
 import { AuthService } from "../../../core/services/auth.service";
 
 @Injectable()
 export class AuthEffects {
+  private actions$ = inject(Actions);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
@@ -97,14 +102,66 @@ export class AuthEffects {
       switchMap(() =>
         this.authService.logout().pipe(
           map(() => AuthActions.logoutSuccess()),
-          catchError((error) => of(AuthActions.logoutFailure({ error: error?.message || "Error inesperado" })))
+          catchError(() => of(AuthActions.logoutSuccess()))
         )
       )
     )
   );
 
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService
-  ) {}
+  updateProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.updateProfile),
+      switchMap(({ payload }) =>
+        this.authService.updateProfile(payload).pipe(
+          map((profile) => AuthActions.updateProfileSuccess({ profile, message: "Perfil actualizado" })),
+          catchError((error) => of(AuthActions.updateProfileFailure({ error: error?.message || "Error inesperado" })))
+        )
+      )
+    )
+  );
+
+  changePassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.changePassword),
+      switchMap(({ payload }) =>
+        this.authService.changePassword(payload).pipe(
+          map((message) => AuthActions.changePasswordSuccess({ message })),
+          catchError((error) => of(AuthActions.changePasswordFailure({ error: error?.message || "Error inesperado" })))
+        )
+      )
+    )
+  );
+
+  forgotPassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.forgotPassword),
+      switchMap(({ payload }) =>
+        this.authService.forgotPassword(payload).pipe(
+          map((message) => AuthActions.forgotPasswordSuccess({ message })),
+          catchError((error) => of(AuthActions.forgotPasswordFailure({ error: error?.message || "Error inesperado" })))
+        )
+      )
+    )
+  );
+
+  resetPassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.resetPassword),
+      switchMap(({ payload }) =>
+        this.authService.resetPassword(payload).pipe(
+          map((message) => AuthActions.resetPasswordSuccess({ message })),
+          catchError((error) => of(AuthActions.resetPasswordFailure({ error: error?.message || "Error inesperado" })))
+        )
+      )
+    )
+  );
+
+  logoutRedirect$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.logoutSuccess),
+        tap(() => this.router.navigate(["/auth/login"]))
+      ),
+    { dispatch: false }
+  );
 }

@@ -1,3 +1,14 @@
-<header>
+<header
+[ngClass]="{
+            'opacity': opacidad
+        }"
+>
+    @if (icono) {
+        <div class="headerIcons">
+            <img src="./img/logoDonPapaMediano.png">
+            <h1> {{ titulo }}</h1>
+        </div>
+        
+    }
     <ng-content></ng-content>
 </header>

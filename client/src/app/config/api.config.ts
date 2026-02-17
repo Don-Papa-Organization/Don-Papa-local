@@ -27,10 +27,12 @@ export const API_ENDPOINTS = {
   inventory: {
     catalog: () => `${API_ROUTES.inventory}/catalogo`,
     catalogDetail: (id: number) => `${API_ROUTES.inventory}/catalogo/${id}`,
+    catalogImage: (id: number) => `${API_ROUTES.inventory}/catalogo/${id}/imagen`,
     products: () => `${API_ROUTES.inventory}/products`,
     productDetail: (id: number) => `${API_ROUTES.inventory}/products/${id}`,
     productStock: (id: number) => `${API_ROUTES.inventory}/products/${id}/stock`,
     productImage: (id: number) => `${API_ROUTES.inventory}/products/${id}/imagen`,
+    productCategory: (idProducto: number, idCategoria: number) => `${API_ROUTES.inventory}/products/${idProducto}/categoria/${idCategoria}`,
     categories: () => `${API_ROUTES.inventory}/categoria`,
     categoryDetail: (id: number) => `${API_ROUTES.inventory}/categoria/${id}`
   },
@@ -42,6 +44,9 @@ export const API_ENDPOINTS = {
     authResendVerification: () => `${API_ROUTES.users}/auth/resend-verification`,
     authLogout: () => `${API_ROUTES.users}/auth/logout`,
     authProfile: () => `${API_ROUTES.users}/auth/profile`,
+    authChangePassword: () => `${API_ROUTES.users}/auth/change-password`,
+    authForgotPassword: () => `${API_ROUTES.users}/auth/forgot-password`,
+    authResetPassword: () => `${API_ROUTES.users}/auth/reset-password`,
     authCheckEmail: (email: string) => `${API_ROUTES.users}/auth/check-email/${email}`,
     clients: () => `${API_ROUTES.users}/clientes`,
     clientsSearch: () => `${API_ROUTES.users}/clientes/buscar`,

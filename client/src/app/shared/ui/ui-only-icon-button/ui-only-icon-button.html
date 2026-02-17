@@ -1,0 +1,74 @@
+@if (!sidebarStyles) {
+	@if (link) {
+		<a [routerLink]="link" class="icon-button">
+			<span
+				class="icon-mask"
+				[hidden]="!urlIcono"
+				[ngStyle]="{
+					'-webkit-mask-image': 'url(' + urlIcono + ')',
+					'mask-image': 'url(' + urlIcono + ')'
+				}"
+				aria-hidden="true"
+			></span>
+		</a>    
+	} @else {
+		<a class="icon-button" (click)="onClick()">
+			<span
+				class="icon-mask"
+				[hidden]="!urlIcono"
+				[ngStyle]="{
+					'-webkit-mask-image': 'url(' + urlIcono + ')',
+					'mask-image': 'url(' + urlIcono + ')'
+				}"
+				aria-hidden="true"
+			></span>
+		</a>
+	}
+} @else{
+	@if (link) {
+		<a 
+		[routerLink]="link" 
+		[class]="customClass"
+		[ngClass]="{
+			'full-width': fullWidth,
+			'bordered': showBorder,
+		}"
+		[ngStyle]="{
+			'height': customHeight
+		}"
+		>
+			<span
+				class="icon-mask"
+				[hidden]="!urlIcono"
+				[ngStyle]="{
+					'-webkit-mask-image': 'url(' + urlIcono + ')',
+					'mask-image': 'url(' + urlIcono + ')'
+				}"
+				aria-hidden="true"
+			></span>
+		</a>   
+	} @else {
+		<button 
+		type="button"
+		[class]="customClass"
+		[ngClass]="{
+			'full-width': fullWidth,
+			'bordered': showBorder,
+		}"
+		[ngStyle]="{
+			'height': customHeight
+		}"
+		(click)="onClick()"
+		>
+			<span
+				class="icon-mask"
+				[hidden]="!urlIcono"
+				[ngStyle]="{
+					'-webkit-mask-image': 'url(' + urlIcono + ')',
+					'mask-image': 'url(' + urlIcono + ')'
+				}"
+				aria-hidden="true"
+			></span>
+		</button>   
+	}
+}

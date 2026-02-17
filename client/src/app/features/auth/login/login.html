@@ -1,58 +1,62 @@
 <main class="login-page">
     <h2>Iniciar Sesión</h2>
 
-    <form (ngSubmit)="login()"  class="formulario" #loginForm="ngForm">
+    <form class="formulario" #loginForm="ngForm" (ngSubmit)="submit(loginForm)">
         <ui-input 
         tituloInput="Correo electronico" 
         placeholder="ejemplo@correo.com"
-        [(ngModel)]="email"
         name="email"
         tipo="email"
         required
-        #emailInput="ngModel"
+        email
+        [(ngModel)]="email"
+        #emailModel="ngModel"
+
 
         >
         </ui-input>            
-        @if (emailInput.invalid && emailInput.touched) {
-            <div class="error">
-                @if (emailInput.errors?.['required']) { Correo electrónico es requerido }
-                @if (emailInput.errors?.['email']) { Correo electrónico no es válido }
-            </div>
-        }
+
         <section class="contrasenaSection">
             <ui-input 
             tituloInput="Contraseña" 
             placeholder="Ingresa tu contraseña"
-            [(ngModel)]="password"
             name="password"
             tipo="password"
             required
-            minlength="6"
-            #passwordInput="ngModel"
+            minlength="8"
+            pattern="^(?=.*[A-Z])(?=.*\d).{8,}$"
+            [(ngModel)]="password"
+            #passwordModel="ngModel"
             >
             </ui-input>
-            <a routerLink="/recuperarContraseña" class="link">¿Olvidaste tu contraseña?</a>
+            <a routerLink="/auth/forgot-password" class="link">¿Olvidaste tu contraseña?</a>
         </section>
         
-         @if (passwordInput.invalid && passwordInput.touched) {
-            <div class="error">
-                @if (passwordInput.errors?.['required']) { Contraseña es requerida }
-                @if (passwordInput.errors?.['minlength']) { La contraseña debe tener al menos 6 caracteres }
-            </div>
-        }
 
-        @if (errorMessage) {
-            <div class="error">{{ errorMessage }}</div>
-        }
 
         <ui-button
             texto="Iniciar Sesion"
             customWidth="250px"
             tipo="submit"
-            [disabled]="loginForm.invalid || isSubmitting"
+            [disabled]="loginForm.invalid || !!(loading$ | async)"
         >
         </ui-button>
 
-        <p class="p">¿No tienes cuenta? <a routerLink="/registrarse" class="link">Registrarse</a></p>
+        <p class="error" *ngIf="emailModel.invalid && loginForm.submitted">
+            <ng-container *ngIf="emailModel.errors?.['required']">El correo es obligatorio.</ng-container>
+            <ng-container *ngIf="emailModel.errors?.['email']">El correo no tiene un formato válido.</ng-container>
+        </p>
+
+        <p class="error" *ngIf="passwordModel.invalid && loginForm.submitted">
+            <ng-container *ngIf="passwordModel.errors?.['required']">La contraseña es obligatoria.</ng-container>
+            <ng-container *ngIf="passwordModel.errors?.['minlength']">Debe tener al menos 8 caracteres.</ng-container>
+            <ng-container *ngIf="passwordModel.errors?.['pattern']">Debe incluir mínimo una mayúscula y un número.</ng-container>
+        </p>
+
+        <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+
+        <p class="p" *ngIf="loginForm.submitted && (error$ | async) as error">{{ error }}</p>
+
+        <p class="link_iniciar_sesion">¿No tienes cuenta? <a routerLink="/auth/register" class="link">Registrarse</a></p>
     </form>
 </main>

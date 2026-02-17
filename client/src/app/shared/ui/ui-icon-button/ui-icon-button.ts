@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-ui-icon-button',
@@ -12,10 +12,16 @@ export class UiIconButton {
   @Input() urlIcono = "";
   @Input() link = "";
 
+  @Output() action = new EventEmitter<void>();
+
   @Input() sidebarStyles: boolean = false;
   @Input() customClass: string = "link";
   @Input() fullWidth: boolean = false;
   @Input() showBorder: boolean = false;
   @Input() customHeight: string = "auto";
+
+  onClick(): void {
+    this.action.emit();
+  }
 
 }

@@ -4,8 +4,13 @@ import {
   AuthLoginRequest,
   AuthRegisterRequest,
   AuthResendVerificationRequest,
-  AuthVerifyEmailRequest
+  AuthVerifyEmailRequest,
+  AuthUpdateProfileRequest,
+  AuthChangePasswordRequest,
+  AuthForgotPasswordRequest,
+  AuthResetPasswordRequest
 } from "../models/auth-requests.model";
+import { UserProfile } from "../../../types/user-profile.type";
 
 export const login = createAction(
   "[Auth] Login",
@@ -112,5 +117,65 @@ export const logoutSuccess = createAction("[Auth] Logout Success");
 
 export const logoutFailure = createAction(
   "[Auth] Logout Failure",
+  props<{ error: string }>()
+);
+
+export const updateProfile = createAction(
+  "[Auth] Update Profile",
+  props<{ payload: AuthUpdateProfileRequest }>()
+);
+
+export const updateProfileSuccess = createAction(
+  "[Auth] Update Profile Success",
+  props<{ profile: UserProfile; message: string }>()
+);
+
+export const updateProfileFailure = createAction(
+  "[Auth] Update Profile Failure",
+  props<{ error: string }>()
+);
+
+export const changePassword = createAction(
+  "[Auth] Change Password",
+  props<{ payload: AuthChangePasswordRequest }>()
+);
+
+export const changePasswordSuccess = createAction(
+  "[Auth] Change Password Success",
+  props<{ message: string }>()
+);
+
+export const changePasswordFailure = createAction(
+  "[Auth] Change Password Failure",
+  props<{ error: string }>()
+);
+
+export const forgotPassword = createAction(
+  "[Auth] Forgot Password",
+  props<{ payload: AuthForgotPasswordRequest }>()
+);
+
+export const forgotPasswordSuccess = createAction(
+  "[Auth] Forgot Password Success",
+  props<{ message: string }>()
+);
+
+export const forgotPasswordFailure = createAction(
+  "[Auth] Forgot Password Failure",
+  props<{ error: string }>()
+);
+
+export const resetPassword = createAction(
+  "[Auth] Reset Password",
+  props<{ payload: AuthResetPasswordRequest }>()
+);
+
+export const resetPasswordSuccess = createAction(
+  "[Auth] Reset Password Success",
+  props<{ message: string }>()
+);
+
+export const resetPasswordFailure = createAction(
+  "[Auth] Reset Password Failure",
   props<{ error: string }>()
 );

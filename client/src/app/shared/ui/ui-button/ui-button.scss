@@ -1,8 +1,8 @@
 /*Diseño del input  botones en tres tamaños*/
 .ui-btn {
   background-color: #D4AF37;
-  color: #ffffff;
-  padding: 10px 40px;
+  color: #0a0802;
+  padding: 10px   ;
   border-radius: 5px;
   border: none;
   cursor: pointer;
@@ -25,4 +25,16 @@
   &:hover {
     opacity: 0.9;
   }
+
+  &.noBackgroundColor{
+      color: white;
+      background-color: transparent;
+      border: solid 1pt #D4AF37;  
+      
+      &:hover {
+        color: #0a0802;
+        background-color: #D4AF37;
+      }
+  }
+
 }

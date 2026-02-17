@@ -6,8 +6,13 @@ import {
   AuthLoginRequest,
   AuthRegisterRequest,
   AuthResendVerificationRequest,
-  AuthVerifyEmailRequest
+  AuthVerifyEmailRequest,
+  AuthUpdateProfileRequest,
+  AuthChangePasswordRequest,
+  AuthForgotPasswordRequest,
+  AuthResetPasswordRequest
 } from "../../domain/auth/models/auth-requests.model";
+import { UserProfile } from "../../types/user-profile.type";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -109,6 +114,50 @@ export class AuthService {
         if (!res.success) {
           throw new Error(res.message || "Error al cerrar sesión");
         }
+      })
+    );
+  }
+
+  updateProfile(payload: AuthUpdateProfileRequest): Observable<UserProfile> {
+    return this.usersApi.updateProfile(payload).pipe(
+      map((res) => {
+        if (!res.success || !res.data) {
+          throw new Error(res.message || "Error al actualizar perfil");
+        }
+        return res.data;
+      })
+    );
+  }
+
+  changePassword(payload: AuthChangePasswordRequest): Observable<string> {
+    return this.usersApi.changePassword(payload).pipe(
+      map((res) => {
+        if (!res.success) {
+          throw new Error(res.message || "Error al cambiar contraseña");
+        }
+        return res.data?.message || res.message || "Contraseña actualizada correctamente";
+      })
+    );
+  }
+
+  forgotPassword(payload: AuthForgotPasswordRequest): Observable<string> {
+    return this.usersApi.forgotPassword(payload).pipe(
+      map((res) => {
+        if (!res.success) {
+          throw new Error(res.message || "Error al enviar correo de recuperación");
+        }
+        return res.data?.message || res.message || "Correo de recuperación enviado";
+      })
+    );
+  }
+
+  resetPassword(payload: AuthResetPasswordRequest): Observable<string> {
+    return this.usersApi.resetPassword(payload).pipe(
+      map((res) => {
+        if (!res.success) {
+          throw new Error(res.message || "Error al restablecer contraseña");
+        }
+        return res.data?.message || res.message || "Contraseña restablecida correctamente";
       })
     );
   }

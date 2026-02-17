@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MenuItem } from '../../interfaces/menu-item';
 
 @Component({
@@ -9,5 +9,11 @@ import { MenuItem } from '../../interfaces/menu-item';
 })
 export class Sidebar {
   @Input() menuItems: MenuItem[] = [];
+  @Input() collapsed = false;
+  @Output() toggleCollapsed = new EventEmitter<void>();
+
+  onToggle(): void {
+    this.toggleCollapsed.emit();
+  }
 
 }

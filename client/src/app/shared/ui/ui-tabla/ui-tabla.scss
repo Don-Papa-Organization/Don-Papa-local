@@ -1,0 +1,48 @@
+.tabla{
+	color: #ffffff;
+	border-collapse: collapse;
+	table-layout: auto;
+	text-align: center;
+	width: fit-content;
+	height: min(fit-content, 90px);
+	background-color: #2B1D13;
+	font-size: 15px;
+	
+	overflow-y: auto;
+	overflow-x: auto;
+	display: block;
+}
+
+.tabla-section{
+	border: 1px solid #D4AF37;
+	background-color: #1A120B;
+	width:  fit-content;
+	height:  300px;
+	padding: 20px 30px;
+	border-radius: 5px;
+	max-height: 640px;
+	max-width: 1200px;
+	overflow: auto;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+
+	scrollbar-color: grey #1A120B;
+}
+
+
+
+.tabla-body{
+	
+}
+
+.tabla-fila{
+	height: 50px;
+}
+
+.tabla-item{
+	font-weight: lighter;
+	padding: 5px;
+	border: 1px solid black;
+	
+}

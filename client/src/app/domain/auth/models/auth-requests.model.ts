@@ -18,3 +18,26 @@ export interface AuthVerifyEmailRequest {
 export interface AuthResendVerificationRequest {
   correo: string;
 }
+
+export interface AuthUpdateProfileRequest {
+  nombre?: string;
+  telefono?: string;
+  direccion?: string;
+  documento?: string;
+}
+
+export interface AuthChangePasswordRequest {
+  contrasenaActual: string;
+  nuevaContrasena: string;
+  confirmarContrasena: string;
+}
+
+export interface AuthForgotPasswordRequest {
+  correo: string;
+}
+
+export interface AuthResetPasswordRequest {
+  token: string;
+  nuevaContrasena: string;
+  confirmarContrasena: string;
+}

@@ -14,10 +14,16 @@ export const authReducer = createReducer(
     AuthActions.loadProfile,
     AuthActions.checkEmail,
     AuthActions.logout,
+    AuthActions.updateProfile,
+    AuthActions.changePassword,
+    AuthActions.forgotPassword,
+    AuthActions.resetPassword,
     (state) => ({
       ...state,
       loading: true,
-      error: undefined
+      error: undefined,
+      emailExists: state.emailExists,
+      message: undefined
     })
   ),
 
@@ -35,6 +41,19 @@ export const authReducer = createReducer(
     loading: false
   })),
 
+  on(AuthActions.updateProfileSuccess, (state, { profile, message }) => ({
+    ...state,
+    profile,
+    user: {
+      idUsuario: profile.id,
+      correo: profile.correo,
+      tipoUsuario: profile.tipoUsuario,
+      activo: profile.activo
+    },
+    message,
+    loading: false
+  })),
+
   on(AuthActions.refreshTokenSuccess, (state, { accessToken }) => ({
     ...state,
     accessToken,
@@ -46,11 +65,26 @@ export const authReducer = createReducer(
     AuthActions.verifyEmailSuccess,
     AuthActions.resendVerificationSuccess,
     AuthActions.checkEmailSuccess,
-    (state) => ({
+    AuthActions.changePasswordSuccess,
+    AuthActions.forgotPasswordSuccess,
+    AuthActions.resetPasswordSuccess,
+    (state, action) => ({
       ...state,
-      loading: false
+      loading: false,
+      message: (action as { message?: string }).message
     })
   ),
+
+  on(AuthActions.checkEmail, (state) => ({
+    ...state,
+    emailExists: undefined
+  })),
+
+  on(AuthActions.checkEmailSuccess, (state, { exists }) => ({
+    ...state,
+    loading: false,
+    emailExists: exists
+  })),
 
   on(AuthActions.logoutSuccess, () => ({
     ...initialAuthState
@@ -65,6 +99,10 @@ export const authReducer = createReducer(
     AuthActions.loadProfileFailure,
     AuthActions.checkEmailFailure,
     AuthActions.logoutFailure,
+    AuthActions.updateProfileFailure,
+    AuthActions.changePasswordFailure,
+    AuthActions.forgotPasswordFailure,
+    AuthActions.resetPasswordFailure,
     (state, { error }) => ({
       ...state,
       loading: false,

@@ -1,0 +1,13 @@
+<main class="login-page">
+  <h2>Verificar correo</h2>
+
+  <div class="content">
+    <p class="loading" *ngIf="(loading$ | async)">Verificando tu correo...</p>
+
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="localError">{{ localError }}</p>
+    <p class="error" *ngIf="(error$ | async) as error">{{ error }}</p>
+
+    <ui-button texto="Volver a iniciar sesión" tipo="button" (accion)="goToLogin()"></ui-button>
+  </div>
+</main>

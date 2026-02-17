@@ -4,8 +4,13 @@ class="ui-btn"
 [attr.type]="tipo"
 [disabled]="disabled"
 [ngStyle]="{
-        'width': customWidth
+        'width': customWidth,
+        'border-radius': borderRadius
     }"
+[ngClass]="{
+        'noBackgroundColor': noBackgroundColor, 
+        'backgroundColorExep': backgroundColorExep
+}"
 >
   {{ texto }}
 </button>

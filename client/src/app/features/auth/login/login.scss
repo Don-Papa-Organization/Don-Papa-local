@@ -1,13 +1,16 @@
 .login-page{
+    max-height: 500px;
+
     width: 370px;
-    height: 439px;
+    height: fit-content;
+    padding-bottom: 15px;
     background-color: #1A120B;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;   
-    
+    border: 1px solid #D4AF37;
 
     h2{
         padding-top: 50px;
@@ -49,12 +52,25 @@
 }
 
 .p{
+    color: #e74c3c;
+}
+
+.link_iniciar_sesion{
     color: white;
 }
 
 .error{
     color: #e74c3c;
     font-size: 12px;
-    align-self: flex-start;
+    align-self: center;
     margin-top: -10px;
+    text-align: center;
+}
+
+.success{
+    color: #2ecc71;
+    font-size: 12px;
+    align-self: center;
+    margin-top: -10px;
+    text-align: center;
 }

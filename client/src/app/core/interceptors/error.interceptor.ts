@@ -9,8 +9,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
 	return next(req).pipe(
 		catchError((err) => {
-			if (err.status === 401) {
-				router.navigate(["/login"]);
+			const isAuthLoginRequest = req.url.includes("/users/auth/login");
+			if (err.status === 401 && !isAuthLoginRequest) {
+				router.navigate(["/auth/login"]);
 			}
 
 			const message =

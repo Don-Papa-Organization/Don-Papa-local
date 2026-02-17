@@ -1,9 +1,10 @@
 import { CanActivateFn, Router, ActivatedRouteSnapshot } from "@angular/router";
 import { inject } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { combineLatest, map, of } from "rxjs";
-import { selectIsAuthenticated, selectUser } from "../../domain/auth/state/auth.selectors";
+import { combineLatest, filter, map, switchMap, take } from "rxjs";
+import { selectAuthLoading, selectIsAuthenticated, selectUser } from "../../domain/auth/state/auth.selectors";
 import { TipoUsuario } from "../../types/tipo.usuario";
+import * as AuthActions from "../../domain/auth/state/auth.actions";
 
 export const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
 	const store = inject(Store);
@@ -12,25 +13,40 @@ export const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
 	const roles = (route.data?.["roles"] as TipoUsuario[] | undefined) ?? [];
 
 	return combineLatest([
-		store.select(selectIsAuthenticated),
-		store.select(selectUser)
+		store.select(selectAuthLoading),
+		store.select(selectIsAuthenticated)
 	]).pipe(
-		map(([isAuthenticated, user]) => {
-			if (!isAuthenticated || !user) {
-				router.navigate(["/login"]);
-				return false;
+		take(1),
+		switchMap(([loading, isAuthenticated]) => {
+			if (!loading && !isAuthenticated) {
+				store.dispatch(AuthActions.loadProfile());
 			}
 
-			if (roles.length === 0) {
-				return true;
-			}
+			return combineLatest([
+				store.select(selectAuthLoading),
+				store.select(selectIsAuthenticated),
+				store.select(selectUser)
+			]).pipe(
+				filter(([currentLoading]) => !currentLoading),
+				take(1),
+				map(([, isAuthenticated, user]) => {
+					if (!isAuthenticated || !user) {
+						router.navigate(["/auth/login"]);
+						return false;
+					}
 
-			const allowed = roles.includes(user.tipoUsuario);
-			if (!allowed) {
-				router.navigate(["/"]);
-			}
+					if (roles.length === 0) {
+						return true;
+					}
 
-			return allowed;
+					const allowed = roles.includes(user.tipoUsuario);
+					if (!allowed) {
+						router.navigate(["/"]);
+					}
+
+					return allowed;
+				})
+			);
 		})
 	);
 };

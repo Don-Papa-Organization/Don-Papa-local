@@ -22,6 +22,14 @@ import { AuthResendVerificationResponseDto } from "../../domain/users/dtos/respo
 import { AuthLogoutResponseDto } from "../../domain/users/dtos/response/auth-logout.response.dto";
 import { AuthProfileResponseDto } from "../../domain/users/dtos/response/auth-profile.response.dto";
 import { AuthCheckEmailResponseDto } from "../../domain/users/dtos/response/auth-check-email.response.dto";
+import { AuthUpdateProfileRequestDto } from "../../domain/users/dtos/request/auth-update-profile.request.dto";
+import { AuthChangePasswordRequestDto } from "../../domain/users/dtos/request/auth-change-password.request.dto";
+import { AuthForgotPasswordRequestDto } from "../../domain/users/dtos/request/auth-forgot-password.request.dto";
+import { AuthResetPasswordRequestDto } from "../../domain/users/dtos/request/auth-reset-password.request.dto";
+import { AuthUpdateProfileResponseDto } from "../../domain/users/dtos/response/auth-update-profile.response.dto";
+import { AuthChangePasswordResponseDto } from "../../domain/users/dtos/response/auth-change-password.response.dto";
+import { AuthForgotPasswordResponseDto } from "../../domain/users/dtos/response/auth-forgot-password.response.dto";
+import { AuthResetPasswordResponseDto } from "../../domain/users/dtos/response/auth-reset-password.response.dto";
 import { ClienteEnrichedDto } from "../../domain/users/dtos/response/list-clients-enriched.response.dto";
 import { EmpleadoListItemDto } from "../../domain/users/dtos/response/list-employees.response.dto";
 import { GetEmployeeResponseDto } from "../../domain/users/dtos/response/get-employee.response.dto";
@@ -38,6 +46,9 @@ export class UsersApi {
 	private readonly authResendVerificationUrl = buildApiUrl(API_ENDPOINTS.users.authResendVerification());
 	private readonly authLogoutUrl = buildApiUrl(API_ENDPOINTS.users.authLogout());
 	private readonly authProfileUrl = buildApiUrl(API_ENDPOINTS.users.authProfile());
+	private readonly authChangePasswordUrl = buildApiUrl(API_ENDPOINTS.users.authChangePassword());
+	private readonly authForgotPasswordUrl = buildApiUrl(API_ENDPOINTS.users.authForgotPassword());
+	private readonly authResetPasswordUrl = buildApiUrl(API_ENDPOINTS.users.authResetPassword());
 	private readonly clientsUrl = buildApiUrl(API_ENDPOINTS.users.clients());
 	private readonly clientsSearchUrl = buildApiUrl(API_ENDPOINTS.users.clientsSearch());
 	private readonly clientsEnrichedUrl = buildApiUrl(API_ENDPOINTS.users.clientsEnriched());
@@ -74,6 +85,22 @@ export class UsersApi {
 
 	getProfile(): Observable<ApiResponse<AuthProfileResponseDto>> {
 		return this.http.get<ApiResponse<AuthProfileResponseDto>>(this.authProfileUrl);
+	}
+
+	updateProfile(dto: AuthUpdateProfileRequestDto): Observable<ApiResponse<AuthUpdateProfileResponseDto>> {
+		return this.http.put<ApiResponse<AuthUpdateProfileResponseDto>>(this.authProfileUrl, dto);
+	}
+
+	changePassword(dto: AuthChangePasswordRequestDto): Observable<ApiResponse<AuthChangePasswordResponseDto>> {
+		return this.http.post<ApiResponse<AuthChangePasswordResponseDto>>(this.authChangePasswordUrl, dto);
+	}
+
+	forgotPassword(dto: AuthForgotPasswordRequestDto): Observable<ApiResponse<AuthForgotPasswordResponseDto>> {
+		return this.http.post<ApiResponse<AuthForgotPasswordResponseDto>>(this.authForgotPasswordUrl, dto);
+	}
+
+	resetPassword(dto: AuthResetPasswordRequestDto): Observable<ApiResponse<AuthResetPasswordResponseDto>> {
+		return this.http.post<ApiResponse<AuthResetPasswordResponseDto>>(this.authResetPasswordUrl, dto);
 	}
 
 	checkEmail(email: string): Observable<ApiResponse<AuthCheckEmailResponseDto>> {

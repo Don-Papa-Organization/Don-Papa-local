@@ -1,0 +1,94 @@
+<main class="profile-page">
+  <h2>Perfil</h2>
+
+  <section class="card">
+    <h3>Editar información personal</h3>
+
+    <form #profileForm="ngForm" (ngSubmit)="saveProfile(profileForm)">
+      <ui-input
+        tituloInput="Nombre"
+        placeholder="Nombre completo"
+        name="nombre"
+        tipo="text"
+        [(ngModel)]="nombre"
+      ></ui-input>
+
+      <ui-input
+        tituloInput="Teléfono"
+        placeholder="Número de teléfono"
+        name="telefono"
+        tipo="text"
+        [(ngModel)]="telefono"
+      ></ui-input>
+
+      <ng-container *ngIf="tipoUsuario === 'cliente'">
+        <ui-input
+          tituloInput="Dirección"
+          placeholder="Dirección"
+          name="direccion"
+          tipo="text"
+          [(ngModel)]="direccion"
+        ></ui-input>
+      </ng-container>
+
+      <ng-container *ngIf="tipoUsuario === 'empleado'">
+        <ui-input
+          tituloInput="Documento"
+          placeholder="Documento"
+          name="documento"
+          tipo="text"
+          [(ngModel)]="documento"
+        ></ui-input>
+      </ng-container>
+
+      <ui-button texto="Guardar cambios" tipo="submit"></ui-button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h3>Cambiar contraseña</h3>
+
+    <form #passwordForm="ngForm" (ngSubmit)="changePassword(passwordForm)">
+      <ui-input
+        tituloInput="Contraseña actual"
+        placeholder="Contraseña actual"
+        name="contrasenaActual"
+        tipo="password"
+        required
+        [(ngModel)]="contrasenaActual"
+        #contrasenaActualModel="ngModel"
+      ></ui-input>
+
+      <ui-input
+        tituloInput="Nueva contraseña"
+        placeholder="Nueva contraseña"
+        name="nuevaContrasena"
+        tipo="password"
+        required
+        minlength="8"
+        pattern="^(?=.*[A-Z])(?=.*\d).{8,}$"
+        [(ngModel)]="nuevaContrasena"
+        #nuevaContrasenaModel="ngModel"
+      ></ui-input>
+
+      <ui-input
+        tituloInput="Confirmar nueva contraseña"
+        placeholder="Confirmar nueva contraseña"
+        name="confirmarContrasena"
+        tipo="password"
+        required
+        minlength="8"
+        pattern="^(?=.*[A-Z])(?=.*\d).{8,}$"
+        [(ngModel)]="confirmarContrasena"
+        #confirmarContrasenaModel="ngModel"
+      ></ui-input>
+
+      <p class="error" *ngIf="passwordMismatch">Las contraseñas no coinciden.</p>
+
+      <ui-button texto="Actualizar contraseña" tipo="submit"></ui-button>
+    </form>
+  </section>
+
+  <p class="success" *ngIf="(message$ | async) as message">{{ message }}</p>
+  <p class="error" *ngIf="(error$ | async) as error">{{ error }}</p>
+</main>

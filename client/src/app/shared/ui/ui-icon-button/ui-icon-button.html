@@ -1,22 +1,46 @@
 @if (!sidebarStyles) {
-    <a [routerLink]="link" class="link">
-   
-        <img [src]="urlIcono" alt="" [hidden]="!urlIcono" class="img">
-        <p class="texto">{{ texto }}</p>
-    </a>    
+    @if (link) {
+        <a [routerLink]="link" class="link">
+            <img [src]="urlIcono" alt="" [hidden]="!urlIcono" class="img">
+            <p class="texto">{{ texto }}</p>
+        </a>    
+    } @else {
+        <a class="link" (click)="onClick()">
+            <img [src]="urlIcono" alt="" [hidden]="!urlIcono" class="img">
+            <p class="texto">{{ texto }}</p>
+        </a>
+    }
 } @else{
-    <a 
-    [routerLink]="link" 
-    [class]="customClass"
-    [ngClass]="{
-        'full-width': fullWidth,
-        'bordered': showBorder,
-    }"
-    [ngStyle]="{
-        'height': customHeight
-    }"
-    >
-        <img [src]="urlIcono" alt="" [hidden]="!urlIcono" class="img">
-        <p class="texto">{{ texto }}</p>
-    </a>   
+    @if (link) {
+        <a 
+        [routerLink]="link" 
+        [class]="customClass"
+        [ngClass]="{
+            'full-width': fullWidth,
+            'bordered': showBorder,
+        }"
+        [ngStyle]="{
+            'height': customHeight
+        }"
+        >
+            <img [src]="urlIcono" alt="" [hidden]="!urlIcono" class="img">
+            <p class="texto">{{ texto }}</p>
+        </a>   
+    } @else {
+        <button 
+        type="button"
+        [class]="customClass"
+        [ngClass]="{
+            'full-width': fullWidth,
+            'bordered': showBorder,
+        }"
+        [ngStyle]="{
+            'height': customHeight
+        }"
+        (click)="onClick()"
+        >
+            <img [src]="urlIcono" alt="" [hidden]="!urlIcono" class="img">
+            <p class="texto">{{ texto }}</p>
+        </button>   
+    }
 }

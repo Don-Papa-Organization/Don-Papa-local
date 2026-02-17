@@ -13,7 +13,9 @@ import { CreateCategoryRequestDto } from "../../domain/inventory/dtos/request/cr
 import { UpdateCategoryRequestDto } from "../../domain/inventory/dtos/request/update-category.request.dto";
 import { CatalogoProductosDataDto } from "../../domain/inventory/dtos/response/list-catalog.response.dto";
 import { ListProductsDataDto } from "../../domain/inventory/dtos/response/list-products.response.dto";
+import { AssociateProductCategoryResponseDto } from "../../domain/inventory/dtos/response/associate-product-category.response.dto";
 import { API_ENDPOINTS, buildApiUrl } from "../../config/api.config";
+import { ImageUrl } from "../../types/image-url.type";
 
 @Injectable({ providedIn: "root" })
 export class InventoryApi {
@@ -51,6 +53,13 @@ export class InventoryApi {
 		return this.http.put<ApiResponse<Producto>>(buildApiUrl(API_ENDPOINTS.inventory.productDetail(id)), dto);
 	}
 
+	associateProductCategory(idProducto: number, idCategoria: number): Observable<AssociateProductCategoryResponseDto> {
+		return this.http.put<AssociateProductCategoryResponseDto>(
+			buildApiUrl(API_ENDPOINTS.inventory.productCategory(idProducto, idCategoria)),
+			{}
+		);
+	}
+
 	updateProductStock(id: number, dto: UpdateProductStockRequestDto): Observable<ApiResponse<Producto>> {
 		return this.http.patch<ApiResponse<Producto>>(buildApiUrl(API_ENDPOINTS.inventory.productStock(id)), dto);
 	}
@@ -59,6 +68,23 @@ export class InventoryApi {
 		const formData = new FormData();
 		formData.append("imagen", imagen);
 		return this.http.post<ApiResponse<Producto>>(buildApiUrl(API_ENDPOINTS.inventory.productImage(id)), formData);
+	}
+
+	getProductImageUrl(id: number): ImageUrl {
+		return buildApiUrl(API_ENDPOINTS.inventory.catalogImage(id));
+	}
+
+	resolveImageUrl(urlImagen?: string | null): ImageUrl {
+		if (!urlImagen) {
+			return "/img/default_product.png";
+		}
+		if (urlImagen.startsWith("http://") || urlImagen.startsWith("https://")) {
+			return urlImagen;
+		}
+		if (urlImagen.startsWith("/")) {
+			return buildApiUrl(urlImagen);
+		}
+		return buildApiUrl(`/${urlImagen}`);
 	}
 
 	deleteProduct(id: number): Observable<ApiResponse<null>> {

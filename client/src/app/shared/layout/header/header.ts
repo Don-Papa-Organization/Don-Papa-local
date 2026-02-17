@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './header.scss'
 })
 export class Header {
-
+  @Input() icono: boolean = false;
+  @Input() titulo: string = "Don Papa Licores";
+  @Input() opacidad: number = 1
 }

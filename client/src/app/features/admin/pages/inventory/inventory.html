@@ -1,0 +1,16 @@
+<div class="inventory-page">
+	<div class="inventory-header">
+		<h1 class="inventory-title">Productos</h1>
+		<app-ui-only-icon-button>
+			
+		</app-ui-only-icon-button>
+	</div>
+	<div class="table-content">
+		<app-ui-tabla 
+			name="table-content"
+			[theadData]="columnas" 
+			[tbodyData]="productosTableData"
+		>
+		</app-ui-tabla>
+	</div>
+</div>
