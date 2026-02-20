@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Inventory } from './inventory';
+import { AgregarForm } from './agregar-form';
 
-describe('Inventory', () => {
-  let component: Inventory;
-  let fixture: ComponentFixture<Inventory>;
+describe('AgregarForm', () => {
+  let component: AgregarForm;
+  let fixture: ComponentFixture<AgregarForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [Inventory]
+      declarations: [AgregarForm]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Inventory);
+    fixture = TestBed.createComponent(AgregarForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

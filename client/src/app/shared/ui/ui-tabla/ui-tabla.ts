@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-ui-tabla',
@@ -55,4 +55,15 @@ export class UiTabla {
       "columna7": "valor7",
     },
   ];
+
+  @Output() editarRegistro = new EventEmitter<any>();
+  @Output() eliminarRegistro = new EventEmitter<any>();
+
+  onEditar(fila: any): void {
+    this.editarRegistro.emit(fila);
+  }
+
+  onEliminar(fila: any): void {
+    this.eliminarRegistro.emit(fila);
+  }
 }

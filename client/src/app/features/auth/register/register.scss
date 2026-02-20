@@ -1,75 +1,58 @@
-.login-page{
-    max-height: 550px;
-
-    width: 370px;
-    height: fit-content;
-    padding-bottom: 15px;
-    background-color: #1A120B;
-
+// Sección de contraseña
+.contrasenaSection {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;   
-    
-    border: 1px solid #D4AF37;
-    h2{
-        padding-top: 50px;
-        padding-bottom: 30px;
-        font-weight: 100;
-        color: white;
-        font-size: 33px;
+    align-items: flex-start;
+    gap: 7px;
+
+    p {
+        color: #ffffffc7;
+        font-size: 11px;
+        width: 270px;
     }
-    margin: 0 auto;
-    margin-top: 50vh;
-    transform: translateY(-50%);
-    border-radius: 7px;
 }
 
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
 
-
-.formulario{
+// Footer del formulario
+[footer] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 22px;
-    .contrasenaSection{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 7px;
-        p{
-            color: #ffffffc7;
-            font-size: 10px;
-            width: 270px;
-        }
-    }
+    justify-content: center;
+    gap: 10px;
     
-
-    ui-button{
-        margin-top: 10px;        
-    }
 }
 
-.link{
+// Enlaces
+.link {
     font-size: 14px;
     color: #D4AF37;
     text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
-.p{
+// Mensajes de estado
+.p {
     color: white;
 }
 
-.error{
+.error {
     color: #e74c3c;
     font-size: 12px;
-    align-self: center;
-    margin-top: -10px;
+    text-align: center;
 }
 
-.success{
+.success {
     color: #2ecc71;
     font-size: 12px;
-    align-self: center;
-    margin-top: -10px;
+    text-align: center;
 }   

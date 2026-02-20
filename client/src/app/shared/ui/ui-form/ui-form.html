@@ -1,0 +1,25 @@
+<main 
+class="ui-form-container" 
+[ngStyle]="{ 'height': 'fit-content' }"
+>
+  <!-- Título opcional -->
+  <h2 *ngIf="titulo" class="form-title">{{ titulo }}</h2>
+  <p *ngIf="subtitulo" class="form-subtitle">{{ subtitulo }}</p>
+
+  <!-- Formulario con content projection -->
+  <form 
+  #formRef="ngForm"
+  class="formulario" 
+  [class.overflow-columns]="hasOverflow"
+  (ngSubmit)="onSubmit(formRef)"
+  >
+
+    <!-- Proyección de contenido principal (inputs, campos, etc.) -->
+    <ng-content></ng-content>
+
+    <!-- Proyección de contenido del footer (botones, enlaces, etc.) -->
+    <div class="form-footer" *ngIf="showFooter">
+      <ng-content class="ng-content-foot" select="[footer]"></ng-content>
+    </div>
+  </form>
+</main>

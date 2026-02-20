@@ -5,11 +5,13 @@ class="ui-btn"
 [disabled]="disabled"
 [ngStyle]="{
         'width': customWidth,
-        'border-radius': borderRadius
+        'border-radius': borderRadius,
+        'background-color': currentBackgroundColor,
+        'border-color': borderColor,
+        '--hover-bg-color': backgroundColor
     }"
 [ngClass]="{
-        'noBackgroundColor': noBackgroundColor, 
-        'backgroundColorExep': backgroundColorExep
+        'no-background': noBackgroundColor
 }"
 >
   {{ texto }}

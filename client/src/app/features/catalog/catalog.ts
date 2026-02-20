@@ -13,7 +13,6 @@ export class Catalog implements OnInit {
   direccion: string = "https://maps.app.goo.gl/Q1G4Ej7qaxHd3hVu5"
   opacidad: number = 0
   noBackgroundColor: boolean = true
-  backgroundColorExep: boolean = true
   borderRadius: string = "16px"
   icono: boolean = true;
 

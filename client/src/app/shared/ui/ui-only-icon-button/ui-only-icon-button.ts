@@ -9,6 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class UiOnlyIconButton {
   @Input() urlIcono = "";
   @Input() link = "";
+  @Input() texto: string = "";
 
   @Output() action = new EventEmitter<void>();
 
@@ -16,6 +17,8 @@ export class UiOnlyIconButton {
   @Input() customClass: string = "icon-button";
   @Input() fullWidth: boolean = false;
   @Input() showBorder: boolean = false;
+  @Input() background_color: boolean = false;
+  @Input() showTextStyle: boolean = false;
   @Input() customHeight: string = "auto";
 
   onClick(): void {

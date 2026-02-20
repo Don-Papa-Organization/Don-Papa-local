@@ -1,27 +1,21 @@
 @if (!sidebarStyles) {
 	@if (link) {
-		<a [routerLink]="link" class="icon-button">
-			<span
-				class="icon-mask"
-				[hidden]="!urlIcono"
-				[ngStyle]="{
-					'-webkit-mask-image': 'url(' + urlIcono + ')',
-					'mask-image': 'url(' + urlIcono + ')'
-				}"
-				aria-hidden="true"
-			></span>
+		<a [routerLink]="link" class="icon-button" [ngClass]="{'text': showTextStyle, 'complete-button': !texto, 'background_color': background_color}">
+			@if (urlIcono) {
+				<img [src]="urlIcono" alt="" class="icon-img" />
+			}
+			@if (texto) {
+				<span class="icon-text">{{ texto }}</span>
+			}
 		</a>    
 	} @else {
-		<a class="icon-button" (click)="onClick()">
-			<span
-				class="icon-mask"
-				[hidden]="!urlIcono"
-				[ngStyle]="{
-					'-webkit-mask-image': 'url(' + urlIcono + ')',
-					'mask-image': 'url(' + urlIcono + ')'
-				}"
-				aria-hidden="true"
-			></span>
+		<a class="icon-button" [ngClass]="{'text': showTextStyle, 'complete-button': !texto, 'background_color': background_color}" (click)="onClick()">
+			@if (urlIcono) {
+				<img [src]="urlIcono" alt="" class="icon-img" />
+			}
+			@if (texto) {
+				<span class="icon-text">{{ texto }}</span>
+			}
 		</a>
 	}
 } @else{
@@ -32,20 +26,20 @@
 		[ngClass]="{
 			'full-width': fullWidth,
 			'bordered': showBorder,
+			'text': showTextStyle,
+			'background_color': background_color,
+			'complete-button': !texto,
 		}"
 		[ngStyle]="{
 			'height': customHeight
 		}"
 		>
-			<span
-				class="icon-mask"
-				[hidden]="!urlIcono"
-				[ngStyle]="{
-					'-webkit-mask-image': 'url(' + urlIcono + ')',
-					'mask-image': 'url(' + urlIcono + ')'
-				}"
-				aria-hidden="true"
-			></span>
+			@if (urlIcono) {
+				<img [src]="urlIcono" alt="" class="icon-img" />
+			}
+			@if (texto) {
+				<span class="icon-text">{{ texto }}</span>
+			}
 		</a>   
 	} @else {
 		<button 
@@ -54,21 +48,21 @@
 		[ngClass]="{
 			'full-width': fullWidth,
 			'bordered': showBorder,
+			'text': showTextStyle,
+			'complete-button': !texto,
+			'background_color': background_color,
 		}"
 		[ngStyle]="{
 			'height': customHeight
 		}"
 		(click)="onClick()"
 		>
-			<span
-				class="icon-mask"
-				[hidden]="!urlIcono"
-				[ngStyle]="{
-					'-webkit-mask-image': 'url(' + urlIcono + ')',
-					'mask-image': 'url(' + urlIcono + ')'
-				}"
-				aria-hidden="true"
-			></span>
+			@if (urlIcono) {
+				<img [src]="urlIcono" alt="" class="icon-img" />
+			}
+			@if (texto) {
+				<span class="icon-text">{{ texto }}</span>
+			}
 		</button>   
 	}
 }

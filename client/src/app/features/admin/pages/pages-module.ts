@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared-module';
 
 import { PagesRoutingModule } from './pages-routing-module';
-import { Inventory } from './inventory/inventory';
 import { LayoutModule } from "../../../shared/layout/layout-module";
+import { FormsModule, NgForm } from '@angular/forms';
+import { InventoryModule } from './inventory/inventory-module';
 
 
 @NgModule({
   declarations: [
-    Inventory
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     SharedModule,
-    LayoutModule
-]
+    LayoutModule,
+    FormsModule,
+    InventoryModule
+  ]
 })
 export class PagesModule { }

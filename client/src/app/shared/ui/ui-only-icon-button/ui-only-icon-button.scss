@@ -1,36 +1,81 @@
-.icon-button{
+.icon-button {
 	text-decoration: none;
 	color: #ffffff;
 	width: fit-content;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: 0.5rem;
 	
+	&.text {
+		background-color: #D4AF37;
+		padding: 2px 4px;
+		border-radius: 5px;
+		color: #000;
+		.icon-img {
+			width: 40px;
+			height: 40px;
+			
+		}
+
+		&:hover {
+			cursor: pointer;
+			
+			filter: opacity(0.8);
+			.icon-img {
+				
+				filter: brightness(1) invert(0);
+			}
+		}
+	}
+
+	&.complete-button{
+		&:hover {
+			cursor: pointer;
+			
+			filter: opacity(0.8);
+			.icon-img {
+				
+				filter: brightness(1) invert(0);
+			}
+		}
+	}
+
 	&.bordered {
 		border-bottom: 2px solid #D4AF37;
 	}
+
 	&.full-width {
 		width: 100%;
 	}
 
-	&:hover{
-		.icon-mask{
-			background-color: #ffffff;
-		}
+	&.background_color{
+		background-color: #D4AF37;
+		border-radius: 4px;
+		border: 1px solid #D4AF37;
 	}
+	
+	
+	&:hover {
+			cursor: pointer;
+			
+			filter: opacity(0.8);
+			.icon-img {
+				
+				filter: brightness(1) invert(0);
+			}
+		}
 }
 
-
-.icon-mask{
+.icon-img {
 	width: 40px;
 	height: 40px;
 	display: inline-block;
-	background-color: #D4AF37;
-	-webkit-mask-repeat: no-repeat;
-	mask-repeat: no-repeat;
-	-webkit-mask-size: contain;
-	mask-size: contain;
-	-webkit-mask-position: center;
-	mask-position: center;
-	
+	flex-shrink: 0;
+	object-fit: contain;
+}
+
+.icon-text {
+	font-size: 20px;
+	font-weight: 500;
 }

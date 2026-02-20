@@ -9,6 +9,12 @@ import { UiProductCard } from './ui/ui-product-card/ui-product-card';
 import { UiOnlyIconButton } from './ui/ui-only-icon-button/ui-only-icon-button';
 import { UiTabla } from './ui/ui-tabla/ui-tabla';
 import { RouterModule } from '@angular/router';
+import { UiForm } from './ui/ui-form/ui-form';
+import { FormsModule } from '@angular/forms';
+import { UiCombobox } from './ui/ui-combobox/ui-combobox';
+import { UiImageUpload } from './ui/ui-image-upload/ui-image-upload';
+import { UiToast } from './ui/ui-toast/ui-toast';
+import { UiToastService } from './ui/ui-toast/ui-toast.service';
 
 @NgModule({
   declarations: [
@@ -19,12 +25,18 @@ import { RouterModule } from '@angular/router';
     UiButtonGridComponent,
     UiProductCard,
     UiOnlyIconButton,
-    UiTabla
+    UiTabla,
+    UiForm,
+    UiCombobox,
+    UiImageUpload,
+    UiToast
   ],
   imports: [
     CommonModule,
-    RouterModule
-],
+    RouterModule,
+    FormsModule
+  ],
+  providers: [UiToastService],
   exports: [
     UiModalComponent,
     UiBreadcrumbsComponent,
@@ -33,7 +45,11 @@ import { RouterModule } from '@angular/router';
     UiButtonGridComponent,
     UiProductCard,
     UiOnlyIconButton,
-    UiTabla
+    UiTabla,
+    UiForm,
+    UiCombobox,
+    UiImageUpload,
+    UiToast
   ]
 })
 export class SharedModule { }

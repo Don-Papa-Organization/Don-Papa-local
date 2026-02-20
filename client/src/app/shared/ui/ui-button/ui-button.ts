@@ -16,5 +16,20 @@ export class UiButton {
   @Input() disabled: boolean = false;
   @Input() borderRadius: string = "5px"
   @Input() noBackgroundColor: boolean = false;
-  @Input() backgroundColorExep: boolean = false
+  @Input() backgroundColor: string = "#D4AF37";
+  
+  // Getter para determinar si se usa un color personalizado
+  get hasCustomColor(): boolean {
+    return this.backgroundColor !== "#D4AF37";
+  }
+  
+  // Getter para determinar el color del borde
+  get borderColor(): string {
+    return this.noBackgroundColor ? this.backgroundColor : 'none';
+  }
+  
+  // Getter para determinar el color de fondo actual
+  get currentBackgroundColor(): string {
+    return this.noBackgroundColor ? 'transparent' : this.backgroundColor;
+  }
 }

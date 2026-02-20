@@ -8,12 +8,33 @@
         <tr *ngFor="let objeto of tbodyData" class="tabla-fila">
             <td *ngFor="let columna of theadData" class="tabla-item">
                 <img
-                    *ngIf="columna === 'imagen' && objeto[columna] && objeto[columna] !== 'N/A'; else texto"
+                    *ngIf="columna === 'imagen' && objeto[columna] && objeto[columna] !== 'N/A'; else acciones"
                     [src]="objeto[columna]"
                     alt="Imagen"
                     style="max-width: 52px; max-height: 52px; object-fit: cover;"
                 />
-                <ng-template #texto>{{objeto[columna]}}</ng-template>
+                <ng-template #acciones>
+                    <ng-container *ngIf="columna === 'Acciones'; else texto">
+                        <div class="acciones-container">
+                            
+                            <app-ui-only-icon-button 
+                            urlIcono="icons/editar.svg"
+                            [background_color]="true"
+                            (action)="onEditar(objeto)"
+                            >
+
+                            </app-ui-only-icon-button>
+                            <app-ui-only-icon-button
+                            urlIcono="icons/eliminar.svg"
+                            [background_color]="true"
+                            (action)="onEliminar(objeto)"
+                            >
+
+                            </app-ui-only-icon-button>
+                        </div>
+                    </ng-container>
+                    <ng-template #texto>{{objeto[columna]}}</ng-template>
+                </ng-template>
             </td>
         </tr>
         

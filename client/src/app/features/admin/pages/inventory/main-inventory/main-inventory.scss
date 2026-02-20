@@ -1,0 +1,45 @@
+
+.inventory-page{
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+	width: 100%;
+}
+
+.buttons{
+    display: flex;
+    gap: 15px;
+}
+
+
+.addImage{
+	margin-top: 20px;
+}
+
+.inventory-header{
+	width: min(100%, 1200px);
+	display: flex;
+    flex-direction: column;
+	justify-content: flex-start;
+    gap: 10px;
+
+}
+
+.inventory-title{
+	color: #ffffff;
+	margin: 0;
+    font-weight: 100;
+}
+
+app-ui-modal{
+    p{
+        margin: 5px 0 10px;
+    }
+
+    .error {
+        color: #EF4444;
+        font-size: 0.875rem;
+        margin: -10px 0 5px 0;
+    }
+}

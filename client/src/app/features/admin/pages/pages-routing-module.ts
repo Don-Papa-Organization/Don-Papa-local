@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayout } from '../main-layout/main-layout';
-import { Inventory } from './inventory/inventory';
 
 const routes: Routes = [
   {
@@ -9,7 +8,7 @@ const routes: Routes = [
     component: MainLayout,
     children: [
       { path: "", pathMatch: "full", redirectTo: "inventory" },
-      { path: "inventory",component: Inventory }
+      { path: "inventory", loadChildren: () => import('./inventory/inventory-module').then(m => m.InventoryModule) }
     ]
   }
 ];

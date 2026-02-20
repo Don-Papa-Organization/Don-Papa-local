@@ -17,11 +17,12 @@ export class MainLayout {
   menuItems: MenuItem[] = [
     { texto: 'Inventario', urlIcono: 'icons/iconoInventario.svg', link: '/admin/inventory' },
     { texto: 'Empleados', urlIcono: 'icons/iconoEmpleados.svg', link: '/empleados' },
-    { texto: 'Reportes', urlIcono: 'icons/iconoReportes.svg', link: '/reportes' },
+    { texto: 'Pedidos', urlIcono: 'icons/iconoReportes.svg', link: '/pedidos' },
     { texto: 'Promociones', urlIcono: 'icons/iconoPromociones.svg', link: '/promociones' },
+    { texto: 'Mesas', urlIcono: 'icons/iconoMesas.svg', link: '/mesas' },
     { texto: 'Usuarios', urlIcono: 'icons/iconoUsuarios.svg', link: '/usuarios' },
     { texto: 'Bitacora', urlIcono: 'icons/iconoBitacora.svg', link: '/monitoreo' },
-    { texto: 'Estadisticas', urlIcono: 'icons/iconoEstadisticas.svg', link: '/historial' }
+    //{ texto: 'Estadisticas', urlIcono: 'icons/iconoEstadisticas.svg', link: '/historial' }
   ];
 
   onLogout(): void {

@@ -2,7 +2,7 @@
 .ui-btn {
   background-color: #D4AF37;
   color: #0a0802;
-  padding: 10px   ;
+  padding: 10px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
@@ -13,7 +13,6 @@
   justify-content: center;
 
   /* Dimensiones */
-  
   max-width: 450px;
   max-height: 50px;
   height: 40px;
@@ -21,20 +20,34 @@
   font-family: inherit;
   font-size: 18px;
 
+  transition: all 0.2s ease;
 
-  &:hover {
-    opacity: 0.9;
+  // Hover por defecto (con backgroundColor sólido)
+  &:hover:not(.no-background) {
+    filter: opacity(0.75);
   }
 
-  &.noBackgroundColor{
-      color: white;
-      background-color: transparent;
-      border: solid 1pt #D4AF37;  
-      
-      &:hover {
-        color: #0a0802;
-        background-color: #D4AF37;
-      }
+  // Cuando se usa noBackgroundColor
+  &.no-background {
+    color: white;
+    background-color: transparent !important;
+    border: solid 1px var(--hover-bg-color, #D4AF37);
+    
+    &:hover {
+      color: #0a0802;
+      background-color: var(--hover-bg-color, #D4AF37) !important;
+      filter: opacity(1);
+    }
   }
 
+  // Estado deshabilitado
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:hover {
+      filter: none;
+      background-color: inherit;
+    }
+  }
 }

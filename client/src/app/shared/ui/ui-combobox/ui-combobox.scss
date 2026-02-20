@@ -1,0 +1,62 @@
+/* template.component.css */
+.input-container {
+  max-width: fit-content;
+  max-height: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-container label {
+  color: #ffffff;
+  font-size: 14px;
+  display: block;
+}
+
+.input-container select {
+  width: 300px;
+  font-size: 14px;
+  height: 50px;
+  background-color: #2B1D13;
+  border: 2px solid #D4AF37;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  appearance: none; /* Elimina el estilo nativo del select */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 30px; /* Espacio para la flecha personalizada */
+}
+
+.input-container select option {
+  background-color: #2B1D13;
+  color: #fff;
+  padding: 10px;
+}
+
+.input-container select:focus {
+  border-color: #D4AF37;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.input-container select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input-container select:hover:not(:disabled) {
+  border-color: #e5c158;
+}
+
+/* Estilos para validación */
+:host(.ng-invalid.ng-touched) .input-container select {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}

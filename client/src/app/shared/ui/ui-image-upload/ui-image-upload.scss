@@ -1,0 +1,160 @@
+.upload-container {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+    position: relative;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.dragover {
+        border-color: #3f51b5;
+        background-color: rgba(63, 81, 181, 0.08);
+    }
+
+    &.loading {
+        cursor: wait;
+        opacity: 0.85;
+    }
+}
+
+/* ── Sin imagen ── */
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    p {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+    }
+}
+
+.upload-icon {
+    width: 48px;
+    height: 48px;
+    color: #9e9e9e;
+}
+
+.btn-seleccionar {
+    background-color: #3f51b5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #303f9f;
+    }
+}
+
+/* ── Preview ── */
+.preview {
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+/* Overlay de carga */
+.upload-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.spinner {
+    width: 28px;
+    height: 28px;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Botón eliminar */
+.btn-remover {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    svg {
+        display: block;
+    }
+}
+
+/* Botón cambiar imagen */
+.btn-cambiar {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* Mensaje de error */
+.upload-error {
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #ef4444;
+    margin: 0;
+    padding: 0 8px;
+}

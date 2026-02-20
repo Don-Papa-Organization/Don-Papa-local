@@ -4,7 +4,7 @@
 	table-layout: auto;
 	text-align: center;
 	width: fit-content;
-	height: min(fit-content, 90px);
+	height: fit-content;
 	background-color: #2B1D13;
 	font-size: 15px;
 	
@@ -28,6 +28,7 @@
 	justify-content: center;
 
 	scrollbar-color: grey #1A120B;
+	
 }
 
 
@@ -41,8 +42,14 @@
 }
 
 .tabla-item{
+	
 	font-weight: lighter;
 	padding: 5px;
 	border: 1px solid black;
 	
+}
+
+.acciones-container{
+	display: inline-flex;
+	gap: 5px;
 }

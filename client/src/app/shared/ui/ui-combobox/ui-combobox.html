@@ -1,0 +1,14 @@
+<!-- template.component.html -->
+<div class="input-container">
+  <label>{{ tituloInput }}</label>
+  <select 
+    class="ui-input-field"
+    [(ngModel)]="selectedOption"
+    [disabled]="isDisabled"
+    (ngModelChange)="onSelectChange($event)"
+  >
+    <option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </option>
+  </select>
+</div>
